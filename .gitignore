@@ -1,2 +1,4 @@
 /track_env
-settings.json
+/.vscode
+/__pycache__
+credentials.py
