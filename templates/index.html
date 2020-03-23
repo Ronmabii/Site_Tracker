@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Testing</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    {%if error %}
+    <p class=error><strong>Error:</strong>
+    {% endif %}
+    <h1>Home</h1>
+    {%if rows|length < 1 %}
+    <h1>NOTHING</h1>
+    {%else%}
+    <table>
+        <tr>
+            <th>Task</th>
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        <tr>
+        {% for row in rows %}
+            <td>{{row.content}}</td>
+            <td>{{row.date_created.date()}}</td>
+            <td>
+                <a href="/delete/{{row.id}}">Delete</a>
+                <br>
+                <a href="/update/{{row.id}}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <form action="/" method='POST'>
+        <input type="text" name="content" id="content">
+        <input type="submit" value="Add">
+    </form>
+
+</div>
+{% endblock %}
