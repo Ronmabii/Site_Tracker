@@ -19,8 +19,3 @@ def send_email(subject,body):
         print('SUCCESS')
     except:
         print('FAIL')
-
-subject = 'SENT'
-body = 'MESSAGE'
-
-send_email(subject,body)

@@ -8,6 +8,9 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]///'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 
+subject = 'SENT3'
+body = 'MESSAGE'
+
 class Data(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
