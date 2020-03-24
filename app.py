@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from mail import *
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]///'
@@ -21,6 +22,7 @@ def index():
     error = None
     if request.method =='POST':
         online_content = request.form['content']
+        # prevent empty entries
         if online_content == '':
             error = True
             flash('WHAT')
@@ -30,6 +32,7 @@ def index():
         try:
             db.session.add(to_db)
             db.session.commit()
+            send_email(subject,body)
 
             return redirect('/')
         except:

@@ -1,8 +1,17 @@
 import smtplib
 import credentials as cred
 
-my_email = cred.EMAIL_ADDRESS
-password = cred.PASSWORD
+# Heroku Variables
+ONLINE = None
+EMAIL = None
+PASS = None
+
+if ONLINE == True:
+    my_email = EMAIL
+    password = PASS
+else:
+    my_email = cred.EMAIL_ADDRESS
+    password = cred.PASSWORD
 
 def send_email(subject,body):
     try:
@@ -17,8 +26,8 @@ def send_email(subject,body):
     except:
         print('FAIL')
 
-subject = 'First Test'
-body = 'Hope it works'
+subject = 'SENT'
+body = 'MESSAGE'
 
 send_email(subject,body)
 
