@@ -1,19 +1,13 @@
 import smtplib
-import credentials as cred
+import os
 
-# Heroku Variables
-ONLINE = None
-EMAIL = None
-PASS = None
-
-if ONLINE == True:
-    my_email = EMAIL
-    password = PASS
-else:
-    my_email = cred.EMAIL_ADDRESS
-    password = cred.PASSWORD
 
 def send_email(subject,body):
+
+    # Environment Variables (Online/Offline)
+    my_email = os.environ.get('CRUD_EMAIL')
+    password = os.environ.get('CRUD_PASS')
+
     try:
         server = smtplib.SMTP('smtp.gmail.com:587')
         server.ehlo()
@@ -30,5 +24,3 @@ subject = 'SENT'
 body = 'MESSAGE'
 
 send_email(subject,body)
-
-# typos strike again(ADRESS)
