@@ -8,8 +8,9 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]///'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 
-subject = 'SENT3'
-body = 'MESSAGE'
+# Text for Email
+subject = 'CRUD STUFF'
+body = 'MESSAGE POSTED'
 
 class Data(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,13 +23,11 @@ class Data(db.Model):
 
 @app.route('/', methods=['POST','GET'])
 def index():
-    error = None
     if request.method =='POST':
         online_content = request.form['content']
         # prevent empty entries
         if online_content == '':
-            error = True
-            flash('WHAT')
+            flash("NO INPUT")
             return redirect('/')
         to_db = Data(content=online_content)
 
@@ -42,10 +41,11 @@ def index():
             return 'Could not add data to database'
     else:
         rows = Data.query.order_by(Data.date_created).all()
-        return render_template('index.html', rows=rows, error=error)
+        return render_template('index.html', rows=rows)
 
 @app.route('/delete/<int:id>')
 def delete(id):
+    # get the row
     to_delete = Data.query.get_or_404(id)
 
     try:

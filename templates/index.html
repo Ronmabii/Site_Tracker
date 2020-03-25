@@ -6,9 +6,15 @@
 
 {% block body %}
 <div class="content">
-    {%if error %}
-    <p class=error><strong>Error:</strong>
-    {% endif %}
+    <!-- Flashed Message if empty input -->
+    {% with messages = get_flashed_messages() %}
+     {% if messages %}
+         {% for message in messages %}
+            {{messages}}
+         {% endfor %}
+     {% endif %}
+    {% endwith %}
+
     <h1>Home</h1>
     {%if rows|length < 1 %}
     <h1>NOTHING</h1>
